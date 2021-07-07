@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  koha:
+    build: .
+    cap_add:
+      - SYS_NICE
+      - DAC_READ_SEARCH
+    ports:
+      - 3080:80
+      - 3081:8081
+        #volumes:
+      #- ./conf/koha:/etc/koha
+      #- ./conf/apache2:/etc/apache2
+  mysql:
+    image: mariadb:10.6.2
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MARIADB_DATABASE: library
+
